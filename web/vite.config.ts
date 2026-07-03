@@ -112,9 +112,16 @@ export default defineConfig({
     ],
     base,
     resolve: {
+        // Force a single React instance. In this bun monorepo Vite can otherwise
+        // create two module instances (pre-bundled vs. raw) which makes React's
+        // internal dispatcher null -> "Cannot read properties of null (reading 'useRef')".
+        dedupe: ['react', 'react-dom'],
         alias: {
             '@': resolve(__dirname, 'src')
         }
+    },
+    optimizeDeps: {
+        include: ['react', 'react-dom', 'react-dom/client', 'react/jsx-runtime']
     },
     build: {
         outDir: 'dist',
