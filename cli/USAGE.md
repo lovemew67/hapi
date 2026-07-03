@@ -1,7 +1,10 @@
 # Usage
 
 ```
-cd cli && bun run build:exe -- --target bun-darwin-arm64
+bun run download:tunwg
+bun run build:web
+cd server && bun run generate:embedded-web-assets
+cd cli && bun run build:exe:allinone -- --target bun-darwin-arm64
 ```
 ```
 hapi server --host=100.x.y.z --port=3006
